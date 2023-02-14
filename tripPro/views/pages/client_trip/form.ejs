@@ -1,0 +1,107 @@
+<%- include('../../fragment/header.ejs') %>
+
+<main>
+    <script type="application/javascript" src="/public/javascripts/validationClientTripFrom.js"></script>
+    <script type="application/javascript" src="/public/javascripts/validationCommon.js"></script>
+    <h2><%= pageTitle %></h2>
+    <form action="<%= formAction %>" class="form" method="post" novalidate onsubmit="return validateForm()">
+        <input type="hidden" name="_id" value="<%= ct._id %>">
+
+        <label for="RegisteredAt">Registration Date: <span class="symbol-required">*</span></label>
+        <input type="date" name="registeredAt" id="registeredAt"
+               placeholder="date"
+               value="<% if (Object.keys(ct).length === 0) { %> <% }else{ %><%= ct.registeredAt %><% } %>"
+               class="<% if (Object.keys(validationErrors).length === 0) { %><% }else{ %><%= validationErrors.find(e => e.path.includes('registeredAt')) ? 'error-input' : '' %><% } %>"/>
+        <span id="errorRegistration" class="errors-text">
+            <% if (Object.keys(validationErrors).length === 0) { %>
+            <% }else{ %>
+                <% if (validationErrors.find(e => e.path.includes('registeredAt'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('registeredAt')).message %>
+                <% } %>
+            <% } %>
+        </span>
+
+        <label for="PaymentDate">Payment Date: <span class="symbol-required">*</span></label>
+        <input type="date" name="paymentDate" id="paymentDate"
+               placeholder="date"
+               value="<% if (Object.keys(ct).length === 0) { %> <% }else{ %><%= ct.paymentDate %><% } %>"
+               class="<% if (Object.keys(validationErrors).length === 0) { %><% }else{ %><%= validationErrors.find(e => e.path.includes('paymentDate')) ? 'error-input' : '' %><% } %>"/>
+        <span id="errorPayment" class="errors-text">
+            <% if (Object.keys(validationErrors).length === 0) { %>
+            <% }else{ %>
+                <% if (validationErrors.find(e => e.path.includes('paymentDate'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('paymentDate')).message %>
+                <% } %>
+            <% } %>
+        </span>
+
+        <label for="idClient">Client Id: <span class="symbol-required">*</span></label>
+        <input type="number" name="idClient" id="idClient" value="<%= ct._id %>">
+
+        <!--
+        <% /* if (Object.keys(validationErrors).length === 0) { %>
+            <select id="idClient" name="idClient" required <%= (formMode == 'showDetails') ? 'disabled' : '' %> >
+                <option value="" selected>--- Select Client ---</option>
+                <% for (let i = 0; i < allClients.length; i++) { let client = allClients[i]; %>
+                <option value="<%= client.id %>" label="<%= client.firstName + ' ' + client.lastName %>"
+                        <%= (ct._id && client.id.toString() == ct.client.id.toString()) ? 'selected' : '' %>></option>
+                <% } %>
+            </select>
+        <% }else{ %>
+            <select id="client" name="idClient" required <%= (formMode == 'showDetails') ? 'disabled' : '' %>
+                    class="<% if (Object.keys(validationErrors).length === 0) { %>
+                        <% }else{ %><%= validationErrors.find(e => e.path.includes('client')) ? 'error-input' : '' %><% } %>">
+                <option value="" selected>--- Select Client ---</option>
+                <% for (let i = 0; i < allclients.length; i++) { let client = allClients[i]; %>
+                <option value="<%= ct.client %>" label="<%= client.name + ' ' + client.lastName %>"
+                        <%= (client.id.toString() == ct.client) ? 'selected' : '' %>></option>
+                <% } %>
+            </select>
+        <% } */ %>
+        -->
+
+        <label for="idTrip">Trip Id: <span class="symbol-required">*</span></label>
+        <input type="number" name="idTrip" id="idTrip"
+               placeholder=""
+               value="<% if (Object.keys(ct).length === 0) { %> <% }else{ %><%= ct.idTrip %><% } %>"
+               class="<% if (Object.keys(validationErrors).length === 0) { %><% }else{ %><%= validationErrors.find(e => e.path.includes('idTrip')) ? 'error-input' : '' %><% } %>"/>
+        <span id="erroridTrip" class="errors-text">
+            <% if (Object.keys(validationErrors).length === 0) { %>
+            <% }else{ %>
+                <% if (validationErrors.find(e => e.path.includes('idTrip'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('idTrip')).message %>
+                <% } %>
+            <% } %>
+        </span>
+
+        <!--
+        <select id="clt" name="idClient" required <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
+            <option value="" selected>---- Select a client ----</option>
+            <% /* for (let i = 0; i < ct.client.clients.length; i++) { let client = ct.client.clients[i];   %>
+            <option value="<%=   ct.client._id   %>" label="<%=   ct.client.firstName + ' ' + ct.client.lastName   %>"
+                    <%=   (ct._id && ct.client._id.toString() == ct.idClient.toString()) ? 'selected' : ''   %>>
+            </option>
+            <%   } */ %>
+        </select>
+        -->
+
+        <% if (formMode == 'showDetails') { %>
+            <div class="form-buttons">
+                <p id="errorsSummary" class="errors-text"></p>
+                <a href="/cts/edit/<%= ct._id %>" class="form-button-edit">Edit</a>
+            </div>
+        <% } %>
+
+        <div class="form-buttons">
+            <p id="errorsSummary" class="errors-text"></p>
+            <% if (formMode != 'showDetails') { %>
+                <input type="submit" value="<%= btnLabel %>" class="form-button-submit"/>
+                <a href="/cts" class="form-button-cancel">Cancel</a>
+            <% } else { %>
+                <a href="/cts" class="form-button-cancel">Return</a>
+            <% } %>
+        </div>
+    </form>
+</main>
+
+<%- include('../../fragment/footer.ejs') %>

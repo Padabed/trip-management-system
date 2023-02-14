@@ -1,0 +1,86 @@
+<%- include('../../fragment/header.ejs') %>
+
+<main>
+    <script type="application/javascript" src="/public/javascripts/validationTripFrom.js"></script>
+    <script type="application/javascript" src="/public/javascripts/validationCommon.js"></script>
+    <h2><%= pageTitle %></h2>
+    <form action="<%= formAction %>" class="form" method="post" novalidate onsubmit="return validateForm()">
+        <input type="hidden" name="_id" value="<%= trip._id %>">
+
+        <label for="Name">Name: <span class="symbol-required">*</span></label>
+        <input type="text" name="name" id="name"
+               placeholder="2-60 characters"
+               value="<% if (Object.keys(trip).length === 0) { %> <% }else{ %><%= trip.name %><% } %>"
+               class="<% if (Object.keys(validationErrors).length === 0) { %><% }else{ %><%= validationErrors.find(e => e.path.includes('name')) ? 'error-input' : '' %><% } %>"/>
+        <span id="errorName" class="errors-text">
+            <% if (Object.keys(validationErrors).length === 0) { %>
+            <% }else{ %>
+                <% if (validationErrors.find(e => e.path.includes('name'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('name')).message %>
+                <% } %>
+            <% } %>
+        </span>
+
+        <label for="DateFrom">DateFrom: <span class="symbol-required">*</span></label>
+        <input type="date" name="dateFrom" id="dateFrom"
+               placeholder="date"
+               value="<% if (Object.keys(trip).length === 0) { %> <% }else{ %><%= trip.dateFrom %><% } %>"
+               class="<% if (Object.keys(validationErrors).length === 0) { %><% }else{ %><%= validationErrors.find(e => e.path.includes('dateFrom')) ? 'error-input' : '' %><% } %>"/>
+        <span id="errorDateFrom" class="errors-text">
+            <% if (Object.keys(validationErrors).length === 0) { %>
+            <% }else{ %>
+                <% if (validationErrors.find(e => e.path.includes('dateFrom'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('dateFrom')).message %>
+                <% } %>
+            <% } %>
+        </span>
+
+        <label for="DateTo">DateTo:</label>
+        <input type="date" name="dateTo" id="dateTo"
+               placeholder="date"
+               value="<% if (Object.keys(trip).length === 0) { %> <% }else{ %><%= trip.dateTo %><% } %>"
+               class="<% if (Object.keys(validationErrors).length === 0) { %><% }else{ %><%= validationErrors.find(e => e.path.includes('dateTo')) ? 'error-input' : '' %><% } %>"/>
+        <span id="errorDateTo" class="errors-text">
+            <% if (Object.keys(validationErrors).length === 0) { %>
+            <% }else{ %>
+                <% if (validationErrors.find(e => e.path.includes('dateTo'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('dateTo')).message %>
+                <% } %>
+            <% } %>
+        </span>
+
+
+        <label for="MaxPeople">MaxPeople <span class="symbol-required">*</span></label>
+        <input type="number" name="maxPeople" id="maxPeople"
+               placeholder="2-1000"
+               value="<% if (Object.keys(trip).length === 0) { %> <% }else{ %><%= trip.maxPeople %><% } %>"
+               class="<% if (Object.keys(validationErrors).length === 0) { %><% }else{ %><%= validationErrors.find(e => e.path.includes('maxPeople')) ? 'error-input' : '' %><% } %>"/>
+        <span id="errorMaxPeople" class="errors-text">
+            <% if (Object.keys(validationErrors).length === 0) { %>
+            <% }else{ %>
+                <% if (validationErrors.find(e => e.path.includes('maxPeople'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('maxPeople')).message %>
+                <% } %>
+            <% } %>
+        </span>
+
+        <% if (formMode == 'showDetails') { %>
+            <div class="form-buttons">
+                <p id="errorsSummary" class="errors-text"></p>
+                <a href="/trips/edit/<%= trip._id %>" class="form-button-edit">Edit</a>
+            </div>
+        <% } %>
+
+        <div class="form-buttons">
+            <p id="errorsSummary" class="errors-text"></p>
+            <% if (formMode != 'showDetails') { %>
+                <input type="submit" value="<%= btnLabel %>" class="form-button-submit"/>
+                <a href="/trips" class="form-button-cancel">Cancel</a>
+            <% } else { %>
+                <a href="/trips" class="form-button-cancel">Return</a>
+            <% } %>
+        </div>
+    </form>
+</main>
+
+<%- include('../../fragment/footer.ejs') %>

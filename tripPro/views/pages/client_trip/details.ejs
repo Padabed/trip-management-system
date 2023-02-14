@@ -1,0 +1,30 @@
+<%- include('../../fragment/header.ejs')%>
+
+   <main>
+    <h2>Client-Trip Details</h2>
+    <form action="" class="form">
+        <label for="RegisteredAt">Registration: </label>
+        <input type="date" id="RegisteredAt" name="RegisteredAt" disabled>
+        <span id="registrationDateError" class="errors-text"></span>
+
+        <label for="PaymentDate">PaymentDate:</label>
+        <input type="date" id="PaymentDate" name="PaymentDate" disabled>
+        <span id="PatmentDateError" class="errors-text"></span>
+
+        <label for="IdClient">IdClient:</label>
+        <input type="number" id="IdClient" name="IdClient" value="1" disabled>
+        <span id="PatmentDateError" class="errors-text"></span>
+
+        <label for="IdTrip">IdTrip:</label>
+        <input type="number" id="IdTrip" name="IdTrip" value="1" disabled>
+        <span id="PatmentDateError" class="errors-text"></span>
+
+        <div>
+            <p id="errorsSummary"></p>
+            <input type="submit" value="Add" class="form-button-submit"/>
+            <a href="list.ejs" class="form-button-cancel">Cancel</a>
+        </div>
+    </form>
+   </main>
+
+<%- include('../../fragment/footer.ejs')%>

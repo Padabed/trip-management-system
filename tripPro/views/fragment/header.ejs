@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<div class="bg">
+    <head>
+        <meta charset="UTF-8">
+        <title>Trip</title>
+        <link rel="stylesheet" href="/css/style2.css"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    </head>
+
+    <body>
+    <span>1</span>
+    <header class="opacity">
+        <h1>Trip Department</h1>
+    </header>
+
+    <span>1</span>
+
+    <% if(loggedUser) { %>
+    <nav>
+            <a href="/">Main page</a>
+            <a href="/clients">Client</a>
+            <a href="/trips">Trip</a>
+            <a href="/cts">Client_Trip</a>
+            <div class="animation
+                <%= navLocation == 'main' ? 'start-mainPage' :
+                    navLocation == 'clt' ? 'start-client' :
+                            navLocation == 'trip' ? 'start-trip' :
+                                    navLocation == 'ct' ? 'start-clientTrip' : '' %>">
+            </div>
+    </nav>
+    <% } %>
+
+    <span>1</span>

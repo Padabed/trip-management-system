@@ -1,0 +1,33 @@
+<%- include('../../fragment/header.ejs')%>
+
+   <main>
+    <h2>Trip Details</h2>
+    <form action="" class="form">
+        <label for="Name">Name:</span></label>
+        <input type="text" name="Name" id="Name" value="Russia-Kazakhstan" disabled>
+        <span id="errorName" class="errors-text"></span>
+
+        <label for="DateFrom">DateFrom:</span></label>
+        <input type="date" name="DateFrom" id="DateFrom" value="2022-10-01" disabled>
+        <span id="errorDateFrom" class="errors-text"></span>
+
+        <label for="DateTo">DateTo:</span></label>
+        <input type="date" name="DateTo" id="DateTo" value="2023-10-01" disabled>
+        <span id="errorDateTo" class="errors-text"></span>
+
+        <label for="MaxPeople">MaxPeople:</span></label>
+        <input type="number" name="MaxPeople" id="MaxPeople" value="200" disabled>
+        <span id="errorMaxPeople" class="errors-text"></span>
+
+        <label for="Description">Description:</span></label>
+        <input type="textarea" name="Description" id="Description" value="no describtion" disabled>
+        <span id="errorDescription" class="errors-text"></span>
+
+        <div>
+            <p id="errorsSummary"></p>
+            <a href="/trips" class="form-button-cancel">Cancel</a>
+        </div>
+    </form>
+   </main>
+
+<%- include('../../fragment/footer.ejs')%>

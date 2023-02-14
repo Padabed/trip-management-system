@@ -1,0 +1,36 @@
+<%- include('../../fragment/header.ejs')%>
+
+   <main>
+    <h2>Trip Details</h2>
+    <table class="table-list">
+        <thead>
+            <tr>
+                <th>Trip Name</th>
+                <th>Client Name</th>
+                <th>Registered Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <%for (let ct of cts) { %>
+            <tr>
+                <td><a href="/trips/details/<%= ct.trip._id %>"><%= ct.trip.name %></a></td>
+                <td><a href="/clients/details/<%= ct.client._id %>"><%= ct.client.firstName + ' ' + ct.client.lastName %></a></td>
+                <td><%= ct.registeredAt.toISOString().split('T')[0] %></td>
+                <!--  <td><//%=  ct.paymentDate.toISOString().split('T')[0] %></td> -->
+                <td>
+                    <ul class="list-actions">
+                        <li><a href="/cts/details/<%=ct._id%>" class="list-actions-button-details">Details</a></li>
+                        <li><a href="/cts/edit/<%=ct._id%>" class="list-actions-button-edit">Edit</a></li>
+                        <li><a href="/cts/delete/<%=ct._id%>" class="list-actions-button-delete">Delete</a></li>
+                    </ul>
+                </td>
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+
+    <p><a href="/cts/add" class="button-add">Add new Client_Trip</a></p>
+   </main>
+
+<%- include('../../fragment/footer.ejs')%>

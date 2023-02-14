@@ -1,0 +1,120 @@
+<%- include('../../fragment/header.ejs') %>
+
+<main>
+    <script type="application/javascript" src="/public/javascripts/validationClientForm.js"></script>
+    <script type="application/javascript" src="/public/javascripts/validationCommon.js"></script>
+    <h2><%= pageTitle %></h2>
+    <form action="<%= formAction %>" class="form" method="post" novalidate onsubmit="return validateForm()">
+        <input type="hidden" name="_id" value="<%= clt._id %>">
+
+        <label for="FirstName">FirstName: <span class="symbol-required">*</span></label>
+        <input type="text" name="firstName" id="firstName"
+               placeholder="2-60 characters"
+               value="<% if (Object.keys(clt).length === 0) { %> <% }else{ %><%= clt.firstName %><% } %>"
+               class="<% if (Object.keys(validationErrors).length === 0) { %><% }else{ %><%= validationErrors.find(e => e.path.includes('firstName')) ? 'error-input' : '' %><% } %>"/>
+        <span id="errorFirstName" class="errors-text">
+            <% if (Object.keys(validationErrors).length === 0) {%><% }else{%>
+                <% if (validationErrors.find(e => e.path.includes('firstName'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('firstName')).message %>
+                <% } %>
+            <% } %>
+        </span>
+
+        <label for="LastName">LastName: <span class="symbol-required">*</span></label>
+        <input type="text" name="lastName" id="lastName"
+               placeholder="2-60 characters"
+               value="<% if (Object.keys(clt).length === 0) { %> <% }else{ %><%= clt.lastName %><% } %>"
+               class="<% if (Object.keys(validationErrors).length === 0) { %><% }else{ %><%= validationErrors.find(e => e.path.includes('lastName')) ? 'error-input' : '' %><% } %>"/>
+        <span id="errorLastName" class="errors-text">
+            <% if (Object.keys(validationErrors).length === 0) {%><% }else{%>
+                <% if (validationErrors.find(e => e.path.includes('lastName'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('lastName')).message %>
+                <% } %>
+            <% } %>
+        </span>
+
+        <label for="Email">Email: <span class="symbol-required">*</span></label>
+        <input type="email" name="email" id="email"
+               placeholder="e.g. name@domain.pl"
+               value="<% if (Object.keys(clt).length === 0) { %> <% }else{ %><%= clt.email %><% } %>"
+               class="<% if (Object.keys(validationErrors).length === 0) { %><% }else{ %><%= validationErrors.find(e => e.path.includes('email')) ? 'error-input' : '' %><% } %>"/>
+        <span id="errorEmail" class="errors-text">
+            <% if (Object.keys(validationErrors).length === 0) {%><% }else{%>
+                <% if (validationErrors.find(e => e.path.includes('email'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('email')).message %>
+                <% } %>
+            <% } %>
+        </span>
+
+        <label for="Telephone">Telephone: <span class="symbol-required">*</span></label>
+        <input type="text" name="telephone" id="telephone"
+               placeholder="8-15 characters"
+               value="<% if (Object.keys(clt).length === 0) { %> <% }else{ %><%= clt.telephone %><% } %>"
+               class="<% if (Object.keys(validationErrors).length === 0) { %><% }else{ %><%= validationErrors.find(e => e.path.includes('telephone')) ? 'error-input' : '' %><% } %>"/>
+        <span id="errorTelephone" class="errors-text">
+            <% if (Object.keys(validationErrors).length === 0) {%><% }else{%>
+                <% if (validationErrors.find(e => e.path.includes('telephone'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('telephone')).message %>
+                <% } %>
+            <% } %>
+        </span>
+
+        <label for="Pesel">Pesel: <span class="symbol-required">*</span></label>
+        <input type="text" name="pesel" id="pesel"
+               placeholder="6-16 characters"
+               value="<% if (Object.keys(clt).length === 0) { %> <% }else{ %><%= clt.pesel %><% } %>"
+               class="<% if (Object.keys(validationErrors).length === 0) { %><% }else{ %><%= validationErrors.find(e => e.path.includes('pesel')) ? 'error-input' : '' %><% } %>"/>
+        <span id="errorPesel" class="errors-text">
+            <% if (Object.keys(validationErrors).length === 0) {%><% }else{%>
+                <% if (validationErrors.find(e => e.path.includes('pesel'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('pesel')).message %>
+                <% } %>
+            <% } %>
+        </span>
+
+        <% if (formMode == 'showDetails') { %>
+            <div class="form-buttons">
+                <p id="errorsSummary" class="errors-text"></p>
+                <a href="/clients/edit/<%= clt._id %>" class="form-button-edit">Edit Client</a>
+            </div>
+        <% } %>
+
+        <!--
+        <% /*if (formMode == 'showDetails' || formMode == 'edit') { %>
+            <h2>Details</h2>
+            <table class="table-list">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>/th>
+                    <th></th>
+                    <th>/th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for (let c of clt.cts) { %>
+                    <tr>
+                        <td><a href="/trip/form/<%= c.trip._id %>"> <%= c.trip.name %> </a></td>
+                        <td><a href="/trip/form/<%= c.trip._id %>"> <%= c.trip.name %> </a></td>
+                        <td><a href="/trip/form/<%= c.trip._id %>"> <%= c.trip.name %> </a></td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
+        <% } */ %>
+        -->
+
+        <div class="form-buttons">
+            <p id="errorsSummary" class="errors-text"></p>
+            <% if (formMode != 'showDetails') { %>
+                <input type="submit" value="<%= btnLabel %>" class="form-button-submit"/>
+                <a href="/clients" class="form-button-cancel">Cancel</a>
+            <% } else { %>
+                <a href="/clients" class="form-button-cancel">Return</a>
+            <% } %>
+        </div>
+    </form>
+
+</main>
+
+<%- include('../../fragment/footer.ejs') %>
